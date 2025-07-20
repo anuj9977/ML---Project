@@ -32,7 +32,7 @@ def evaluate_model(X_train,y_train,X_test,y_test,models,param):
 
             model.set_params(**grid_search.best_params_)
             model.fit(X_train,y_train)
-            
+
 
 
             y_train_pred=model.predict(X_train) 
@@ -45,6 +45,13 @@ def evaluate_model(X_train,y_train,X_test,y_test,models,param):
 
         return report
 
+    except Exception as e:
+        raise CustomException(e,sys)
+    
+def load_object(file_path):
+    try:
+        with open(file_path, 'rb') as f:
+            return dill.load(f)
     except Exception as e:
         raise CustomException(e,sys)
     
